@@ -32,7 +32,7 @@ The following pseudocode outlines the process of matching students to projects u
 2. **Initialize parameters:**
    - Number of students: 50
    - Number of projects: 10
-   - Students per project: Calculate by dividing the number of students by the number of projects
+   - Students per project: Calculated by dividing the number of students by the number of projects.
    - Options per student: 5
 
 3. **Generate students' preference lists:**
