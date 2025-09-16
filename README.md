@@ -92,15 +92,6 @@ python two_stage_allocation.py input.xlsx
 ```
 
 ---
-
-## 📖 References / 参考文献
-
-* Original Report: *Optimal Project Allocation* (Ru Zhang & Thomas A. Weber, 2024-08-31)
-  原始报告：《最优项目分配》（Ru Zhang & Thomas A. Weber, 2024-08-31）
-* Upgraded Report: *Two-Stage Optimization Algorithm* (Ru Zhang, 2025)
-  升级报告：《二阶段优化算法》（Ru Zhang, 2025）
-
----
 ## 📝 License / 许可证
 
 This project is licensed under the MIT License 
