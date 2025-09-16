@@ -1,7 +1,3 @@
-好嘞 👍 我帮你整理一个 **双语版 README**，你可以直接放到 GitHub。
-
----
-
 # Optimal Project Allocation System / 最优项目分配系统
 
 This repository provides algorithms for allocating students to projects under capacity and preference constraints.
