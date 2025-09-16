@@ -1,65 +1,111 @@
-# Student Project Allocation System
+好嘞 👍 我帮你整理一个 **双语版 README**，你可以直接放到 GitHub。
 
-## Project Overview
+---
 
-This project utilizes an improved Gale-Shapley algorithm to address the matching issue between students and projects, aiming to achieve a fair and stable allocation system. By considering the preferences of both students towards projects and the capacity of each project to accommodate students, the system is able to assign each student to a suitable project, thereby optimizing student satisfaction and project talent allocation.
+# Optimal Project Allocation System / 最优项目分配系统
 
-## Features
+This repository provides algorithms for allocating students to projects under capacity and preference constraints.
+It was originally developed for the **MGT-555 course at EPFL** to assign students to industry-sponsored projects in a fair, efficient, and transparent way.
 
-- **Fairness**: Ensures that all students are allocated to projects as fairly as possible according to their preferences.
-- **Stability**: The final matching results are stable, with no student or project preferring each other over their current allocation.
-- **Optimized Gale-Shapley Algorithm**: Through algorithm optimization, the efficiency and satisfaction of matching are improved.
+本仓库提供了一套学生–项目分配算法，考虑了项目容量和学生偏好限制。
+该系统最初为 **EPFL MGT-555 课程**开发，用于在公平、高效、透明的原则下将学生分配到企业合作项目。
 
-## Requirements
+---
 
-- A Google account to access Google Colab.
-- Internet connection.
+## ✨ Features / 功能特点
 
-## How to View and Run in Google Colab
+We provide **two generations** of algorithms:
+本项目包含 **两个阶段的算法版本**：
 
-1. **Access the Notebook**: Click on the link provided in the repository to open the Colab notebook. If a direct link is not provided, you can save the `.ipynb` file to your Google Drive and open it with Google Colab.
+### 📌 Original Algorithms (Report Version, 2024-08-31)
 
-2. **Run the Notebook**: Once the notebook is open in Colab, you can run the cells sequentially by clicking on the play button next to each cell or by using the shortcut `Ctrl + Enter` (or `Cmd + Enter` on Mac).
+原始算法（报告版，2024-08-31）：
 
-3. **View the Results**: The output of each cell will be displayed directly below the cell after execution. This includes the final project allocations and any print statements or visualizations included in the notebook.
+1. **Greedy Allocation / 贪心分配**
 
-## Pseudocode Description
+   * Fast and simple / 简单快速。
+   * Assigns students iteratively based on highest remaining preference / 按剩余最高偏好逐步分配。
+   * Does not guarantee stability or global fairness / 不保证稳定性或整体公平性。
 
-The following pseudocode outlines the process of matching students to projects using an improved Gale-Shapley algorithm:
+2. **Stable Matching (Gale–Shapley) / 稳定匹配算法（GS）**
 
-1. **Set a random seed for reproducibility.**
+   * Ensures stability (no blocking pairs) / 保证稳定性（无阻塞对）。
+   * Widely used in matching markets (e.g., residency matching) / 常用于匹配市场（如医学生住院分配）。
+   * May not maximize the number of students assigned to their top-3 choices / 未必能最大化进入前三志愿的学生比例。
 
-2. **Initialize parameters:**
-   - Number of students: 50
-   - Number of projects: 10
-   - Students per project: Calculated by dividing the number of students by the number of projects.
-   - Options per student: 5
+3. **Score-Based Allocation / 基于打分的分配**
 
-3. **Generate students' preference lists:**
-   - For each student, randomly generate a list of 5 preferred projects.
+   * Assigns numerical scores to preferences / 将志愿转化为数值评分。
+   * Maximizes the sum of scores subject to capacity constraints / 在容量约束下最大化总得分。
+   * Flexible but computationally heavier / 灵活，但计算量较大。
 
-4. **Initialize projects' capacity:**
-   - Each project has a certain number of slots to accommodate students.
+---
 
-5. **Define the optimized Gale-Shapley algorithm function:**
-   - Initialize project allocations and remaining capacities.
-   - Attempt to allocate students to their top three choices.
-   - Record and print the time taken for allocation.
+### 📌 Upgraded Algorithm (Two-Stage Optimization, 2025 Version)
 
-6. **Define a function to finalize allocations:**
-   - For unallocated students, try to assign them to projects based on their preferences until all students are allocated.
+升级算法（二阶段优化，2025 版本）：
 
-7. **Execute the optimized Gale-Shapley function for preliminary student-to-project allocation.**
+* **Stage 1 / 阶段一:** Maximize the number of students assigned to one of their **Top-3 preferences**
+  最大化进入 **前三志愿** 的学生数量（公平性保证）。
 
-8. **Execute the function to finalize allocations, ensuring all students are allocated and preferences are considered as much as possible.**
+* **Stage 2 / 阶段二:** Within that solution set, maximize the **overall satisfaction score**
+  在阶段一的解集上，进一步最大化 **整体满意度得分**（按志愿顺序加权）。
 
-9. **Print the final project allocations:**
-   - For each project, list the allocated students and their top three preferences.
+**Advantages / 优势:**
 
-## Contribution Guide
+* Balances **fairness** (Top-3 coverage) and **satisfaction** (rank quality)
+  同时兼顾 **公平性**（前三覆盖率）与 **满意度**（志愿质量）。
+* Transparent optimization process / 优化过程透明。
+* Outputs detailed results / 输出包含：
 
-We welcome all forms of contributions, including but not limited to suggestions for new features, code optimization, documentation improvements, or issue reporting. Please submit your contributions via GitHub's Issue and Pull Request mechanisms.
+  * Student ID / 学号
+  * Assigned Project / 分配项目
+  * Preference Rank / 志愿顺序
+  * Top-3 (Yes/No) / 是否进入前三志愿
 
-## License Information
+---
 
-This project is licensed under the MIT License. For more details, please refer to the `LICENSE` file.
+## ⚖️ Comparison / 算法比较
+
+| Algorithm / 算法         | Stability / 稳定性 | Fairness (Top-3) / 公平性 (前三) | Satisfaction / 满意度 | Complexity / 复杂度 |
+| ---------------------- | --------------- | --------------------------- | ------------------ | ---------------- |
+| Greedy Allocation      | ❌               | Medium / 中等                 | Medium / 中等        | Low / 低          |
+| Stable Matching (GS)   | ✅               | Medium / 中等                 | Medium–High / 中–高  | Low–Medium / 中低  |
+| Score-Based Allocation | ❌               | High / 高                    | High / 高           | Medium–High / 中高 |
+| Two-Stage Optimization | ✅ (soft / 弱)    | **High / 高**                | **High / 高**       | High / 高         |
+
+---
+
+## 📊 Outputs / 输出结果
+
+* Excel/CSV file listing assignments with preference ranks.
+  输出包含学生分配及志愿顺序的 Excel/CSV 文件。
+* Summary statistics on fairness and satisfaction.
+  提供公平性和满意度的汇总统计。
+
+---
+
+## 📌 Usage / 使用方法
+
+```bash
+# Install dependencies / 安装依赖
+pip install pulp pandas numpy
+
+# Run the two-stage optimization / 运行二阶段优化
+python two_stage_allocation.py input.xlsx
+```
+
+---
+
+## 📖 References / 参考文献
+
+* Original Report: *Optimal Project Allocation* (Ru Zhang & Thomas A. Weber, 2024-08-31)
+  原始报告：《最优项目分配》（Ru Zhang & Thomas A. Weber, 2024-08-31）
+* Upgraded Report: *Two-Stage Optimization Algorithm* (Ru Zhang, 2025)
+  升级报告：《二阶段优化算法》（Ru Zhang, 2025）
+
+---
+## 📝 License / 许可证
+
+This project is licensed under the MIT License 
+本项目采用 MIT 许可证
